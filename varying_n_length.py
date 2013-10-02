@@ -36,6 +36,9 @@ def make_chains(corpus, n_length):
     for i in range(len(list_of_words)-n_length):
         key = make_key(list_of_words, i, n_length)
         value = list_of_words[i+n_length]
+        # check if the key is in a dictionary
+            # if the key does not exist, set the value to an empty list
+            # if the key does exist, append the word to the list
         chain_dict.setdefault(key, []).append(value)
 
     return chain_dict
@@ -43,13 +46,9 @@ def make_chains(corpus, n_length):
 def make_text(chains):
     """Takes a dictionary of markov chains and returns random text
     based off an original text."""
-    # sentence ends up with 21 words
-    sentence = []
+    # pick first n words to start chain
     random_tuple = choice(chains.keys())
-
-    # added first n words to the sentence
-    for word in random_tuple:
-        sentence.append(word)
+    sentence = list(random_tuple)
 
     #fill in the rest of the sentence chain
     for i in range(21-len(random_tuple)):
@@ -80,7 +79,7 @@ def post_to_twitter(post):
                     access_token_key,
                     access_token_secret)
 
-    #api.PostUpdate(post)
+    api.PostUpdate(post)
 
 def main():
     
@@ -103,12 +102,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-

@@ -26,12 +26,13 @@ def make_chains(corpus):
         value = list_of_words[i+2]
         chain_dict.setdefault(key, []).append(value)
 
+    print chain_dict    
     return chain_dict
 
 
 def make_text(chains):
-    """Takes a dictionary of markov chains and returns random text
-    based off an original text."""
+    '''Takes a dictionary of markov chains and returns random text
+    based off an original text.'''
     sentence = []
     random_tuple = choice(chains.keys())
     sentence.append(random_tuple[0])
@@ -66,6 +67,7 @@ def post_to_twitter(post):
 
     #api.PostUpdate(post)
 
+
 def main():
     
     script, source = argv
@@ -76,12 +78,13 @@ def main():
     chain_dict = make_chains(input_text)
     random_text = make_text(chain_dict)
 
+    
     pretty_string = " ".join(random_text)
     post_to_twitter(pretty_string)
 
     for i in random_text:
        print i, 
-    
+   
 
 if __name__ == "__main__":
     main()
